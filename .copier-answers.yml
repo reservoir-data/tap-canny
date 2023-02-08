@@ -1,0 +1,20 @@
+# Changes here will be overwritten by Copier
+_commit: 0.0.14
+_src_path: gh:edgarrmondragon/singer-tap-copier-template
+author_email: edgarrm358@gmail.com
+author_fullname: Edgar Ramírez-Mondragón
+author_username: edgarrmondragon
+python_main_version: '3.10'
+repository_name: tap-canny
+repository_namespace: edgarrmondragon
+repository_provider: github.com
+tap_auth_method: API Key
+tap_id: tap-canny
+tap_package_command_line_name: tap-canny
+tap_package_distribution_name: tap-canny
+tap_package_import_name: tap_canny
+tap_source_description: Platform for capturing, organizing and analyzing product feedback
+tap_source_id: Canny
+tap_source_name: Canny
+tap_stream_type: REST
+vscode_files: true

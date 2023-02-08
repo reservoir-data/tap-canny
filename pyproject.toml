@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "tap-canny"
+version = "0.0.1"
+description = "`tap-canny` is a Singer tap for Canny, built with the Meltano SDK for Singer Taps."
+authors = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
+keywords = [
+  "ELT",
+  "singer.io",
+  "Canny",
+]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/edgarrmondragon/tap-canny"
+repository = "https://github.com/edgarrmondragon/tap-canny"
+documentation = "https://github.com/edgarrmondragon/tap-canny#readme"
+
+[tool.poetry.dependencies]
+python = "<3.12,>=3.7.1"
+singer-sdk = "0.19.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+singer-sdk = {extras = ["testing"], version = "0.19.0"}
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3 # Vertical Hanging Indent
+use_parentheses = true
+include_trailing_comma = true
+src_paths = "tap_canny"
+known_first_party = "tap_canny"
+add_imports = [
+  "from __future__ import annotations",
+]
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = ["backoff.*"]
+
+[build-system]
+requires = ["poetry-core>=1,<2"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+# CLI declaration
+"tap-canny" = "tap_canny.tap:TapCanny.cli"
