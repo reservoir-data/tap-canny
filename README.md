@@ -30,7 +30,7 @@ Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 | :---------------- | :-------------------- | :----------------- |
 | boards            | `/v1/boards/list`     | FULL_TABLE         |
 | categories        | `/v1/categories/list` | FULL_TABLE         |
-| changelog_entries | `/v1/entries/list`    | INCREMENTAL        |
+| changelog_entries | `/v1/entries/list`    | FULL_TABLE         |
 | comments          | `/v1/comments/list`   | FULL_TABLE         |
 | companies         | `/v1/companies/list`  | FULL_TABLE         |
 | opportunities     | `/v1/opportunities`   | FULL_TABLE         |

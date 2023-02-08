@@ -129,7 +129,6 @@ class ChangelogEntries(CannyStream):
     name = "changelog_entries"
     path = "/v1/entries/list"
     primary_keys = ["id"]
-    replication_key = "lastSaved"
     records_jsonpath = "$.entries[*]"
 
     schema = th.PropertiesList(
