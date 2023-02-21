@@ -309,7 +309,11 @@ class Comments(CannyStream):
         ),
     ).to_dict()
 
-    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+    def post_process(
+        self,
+        row: dict,
+        context: dict | None = None,  # noqa: ARG002
+    ) -> dict | None:
         """Post-process a row.
 
         Args:
@@ -537,7 +541,11 @@ class Posts(CannyStream):
         ),
     ).to_dict()
 
-    def post_process(self, row: dict, context: dict | None = None) -> dict:
+    def post_process(
+        self,
+        row: dict,
+        context: dict | None = None,  # noqa: ARG002
+    ) -> dict:
         """Post-process a record.
 
         Args:
@@ -612,7 +620,11 @@ class StatusChanges(CannyStream):
         ),
     ).to_dict()
 
-    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+    def post_process(
+        self,
+        row: dict,
+        context: dict | None = None,  # noqa: ARG002
+    ) -> dict | None:
         """Post process the row.
 
         Args:
@@ -672,7 +684,11 @@ class Tags(CannyStream):
         ),
     ).to_dict()
 
-    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+    def post_process(
+        self,
+        row: dict,
+        context: dict | None = None,  # noqa: ARG002
+    ) -> dict | None:
         """Post process the row.
 
         Args:
@@ -817,7 +833,11 @@ class Votes(CannyStream):
         ),
     ).to_dict()
 
-    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+    def post_process(
+        self,
+        row: dict,
+        context: dict | None = None,  # noqa: ARG002
+    ) -> dict | None:
         """Post process the row.
 
         Args:

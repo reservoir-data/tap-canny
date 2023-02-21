@@ -44,3 +44,8 @@ repos:
     - darglint
     - flake8-annotations
     - flake8-docstrings
+
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.0.250
+  hooks:
+  - id: ruff
