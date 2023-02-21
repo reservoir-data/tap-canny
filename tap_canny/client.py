@@ -63,7 +63,7 @@ class CannyStream(RESTStream):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: dict | None,  # noqa: ARG002
         next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
@@ -75,11 +75,10 @@ class CannyStream(RESTStream):
         Returns:
             Mapping of URL query parameters.
         """
-        params = {
+        return {
             "limit": self.page_size,
             "skip": next_page_token or 0,
         }
-        return params
 
     def get_new_paginator(self) -> CannyPaginator:
         """Get a new paginator instance.
