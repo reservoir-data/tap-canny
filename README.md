@@ -1,6 +1,6 @@
 # `tap-canny`
 
-Singer tap for Canny.
+Singer tap for [Canny](https://canny.io/), a feedback management platform..
 
 Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
