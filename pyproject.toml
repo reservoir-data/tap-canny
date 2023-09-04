@@ -19,7 +19,7 @@ python = "<3.12,>=3.7.1"
 singer-sdk = "~=0.31.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.0"
+pytest = "^7.4.1"
 singer-sdk = {extras = ["testing"], version = "0.31.1"}
 
 [tool.isort]
