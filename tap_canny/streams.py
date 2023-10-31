@@ -2,31 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+import typing as t
 
 from singer_sdk import typing as th
-from singer_sdk.pagination import BaseOffsetPaginator
 
-from tap_canny.client import CannyStream
+from tap_canny.client import CannyPaginator, CannyStream
 
-if TYPE_CHECKING:
+if t.TYPE_CHECKING:
     from requests import Response
-
-
-class CannyPaginator(BaseOffsetPaginator):
-    """Canny API pagination strategy."""
-
-    def has_more(self, response: Response) -> bool:
-        """Return True if there are more pages to fetch.
-
-        Args:
-            response: The last response object.
-
-        Returns:
-            True if there are more pages to fetch.
-        """
-        data = response.json()
-        return data.get("has_more", False)
 
 
 class Boards(CannyStream):
@@ -34,7 +17,7 @@ class Boards(CannyStream):
 
     name = "boards"
     path = "/v1/boards/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.boards[*]"
 
     schema = th.PropertiesList(
@@ -86,7 +69,7 @@ class Categories(CannyStream):
 
     name = "categories"
     path = "/v1/categories/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.categories[*]"
 
     schema = th.PropertiesList(
@@ -128,7 +111,7 @@ class ChangelogEntries(CannyStream):
 
     name = "changelog_entries"
     path = "/v1/entries/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.entries[*]"
 
     schema = th.PropertiesList(
@@ -238,7 +221,7 @@ class Comments(CannyStream):
 
     name = "comments"
     path = "/v1/comments/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.comments[*]"
 
     schema = th.PropertiesList(
@@ -341,7 +324,7 @@ class Companies(CannyStream):
 
     name = "companies"
     path = "/v1/companies/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.companies[*]"
 
     schema = th.PropertiesList(
@@ -357,7 +340,7 @@ class Companies(CannyStream):
         ),
         th.Property(
             "customFields",
-            th.ObjectType(),
+            th.ArrayType(th.ObjectType()),
             description="The company's custom fields",
         ),
         th.Property(
@@ -388,7 +371,7 @@ class Opportunities(CannyStream):
 
     name = "opportunities"
     path = "/v1/opportunities/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.opportunities[*]"
 
     schema = th.PropertiesList(
@@ -435,7 +418,7 @@ class Posts(CannyStream):
 
     name = "posts"
     path = "/v1/posts/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.posts[*]"
 
     schema = th.PropertiesList(
@@ -479,7 +462,7 @@ class Posts(CannyStream):
         ),
         th.Property(
             "customFields",
-            th.ObjectType(),
+            th.ArrayType(th.ObjectType()),
             description="The post's custom fields",
         ),
         th.Property(
@@ -575,7 +558,7 @@ class StatusChanges(CannyStream):
 
     name = "status_changes"
     path = "/v1/status_changes/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.statusChanges[*]"
 
     schema = th.PropertiesList(
@@ -648,7 +631,7 @@ class Tags(CannyStream):
 
     name = "tags"
     path = "/v1/tags/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.tags[*]"
 
     schema = th.PropertiesList(
@@ -705,7 +688,7 @@ class Tags(CannyStream):
         return row
 
 
-class UsersPaginator(BaseOffsetPaginator):
+class UsersPaginator(CannyPaginator):
     """Users paginator."""
 
     def has_more(self, response: Response) -> bool:
@@ -725,7 +708,7 @@ class Users(CannyStream):
 
     name = "users"
     path = "/v1/users/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$[*]"
 
     schema = th.PropertiesList(
@@ -741,7 +724,7 @@ class Users(CannyStream):
         ),
         th.Property(
             "customFields",
-            th.ObjectType(),
+            th.ArrayType(th.ObjectType()),
             description="The user's custom fields",
         ),
         th.Property(
@@ -794,7 +777,7 @@ class Votes(CannyStream):
 
     name = "votes"
     path = "/v1/votes/list"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.votes[*]"
 
     schema = th.PropertiesList(
