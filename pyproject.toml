@@ -16,11 +16,11 @@ documentation = "https://github.com/edgarrmondragon/tap-canny#readme"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
-singer-sdk = "~=0.33.0"
+singer-sdk = "~=0.34.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=7.4"
-singer-sdk = {extras = ["testing"], version = "~=0.33.0"}
+singer-sdk = {extras = ["testing"], version = "~=0.34.0"}
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
