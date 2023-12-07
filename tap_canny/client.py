@@ -25,10 +25,10 @@ class CannyPaginator(BaseOffsetPaginator):
             True if there are more pages to fetch.
         """
         data = response.json()
-        return data.get("has_more", False)
+        return data.get("has_more", False)  # type: ignore[no-any-return]
 
 
-class CannyStream(RESTStream):
+class CannyStream(RESTStream[int]):
     """Canny stream class."""
 
     url_base = "https://canny.io/api"
@@ -51,7 +51,7 @@ class CannyStream(RESTStream):
         )
 
     @property
-    def http_headers(self) -> dict:
+    def http_headers(self) -> dict[str, str]:
         """Return the http headers needed.
 
         Returns:
@@ -63,7 +63,7 @@ class CannyStream(RESTStream):
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: dict[Any, Any] | None,  # noqa: ARG002
         next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
