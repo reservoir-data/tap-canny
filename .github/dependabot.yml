@@ -9,14 +9,14 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "19:22"
+      time: "12:00"
     versioning-strategy: increase-if-necessary
     reviewers:
       - "edgarrmondragon"
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
-      time: "19:22"
+      time: "12:00"
       interval: "daily"
     reviewers:
       - "edgarrmondragon"
@@ -24,6 +24,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      time: "19:22"
+      time: "12:00"
     reviewers:
       - "edgarrmondragon"

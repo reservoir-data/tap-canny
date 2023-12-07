@@ -294,9 +294,9 @@ class Comments(CannyStream):
 
     def post_process(
         self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict | None:
+        row: dict[str, t.Any],
+        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+    ) -> dict[str, t.Any] | None:
         """Post-process a row.
 
         Args:
@@ -396,7 +396,7 @@ class Opportunities(CannyStream):
             description="The opportunity's post IDs",
         ),
         th.Property(
-            "salesforceOpporunityID",
+            "salesforceOpportunityID",
             th.StringType,
             description="The opportunity's Salesforce opportunity ID",
         ),
@@ -526,9 +526,9 @@ class Posts(CannyStream):
 
     def post_process(
         self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict:
+        row: dict[str, t.Any],
+        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+    ) -> dict[str, t.Any] | None:
         """Post-process a record.
 
         Args:
@@ -605,9 +605,9 @@ class StatusChanges(CannyStream):
 
     def post_process(
         self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict | None:
+        row: dict[str, t.Any],
+        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+    ) -> dict[str, t.Any] | None:
         """Post process the row.
 
         Args:
@@ -669,9 +669,9 @@ class Tags(CannyStream):
 
     def post_process(
         self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict | None:
+        row: dict[str, t.Any],
+        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+    ) -> dict[str, t.Any] | None:
         """Post process the row.
 
         Args:
@@ -818,9 +818,9 @@ class Votes(CannyStream):
 
     def post_process(
         self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict | None:
+        row: dict[str, t.Any],
+        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+    ) -> dict[str, t.Any] | None:
         """Post process the row.
 
         Args:
