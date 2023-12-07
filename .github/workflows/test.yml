@@ -11,16 +11,16 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     env:
-      PIP_CONSTRAINT: .github/workflows/constraints.txt
       FORCE_COLOR: "1"
+      PIP_CONSTRAINT: .github/workflows/constraints.txt
     strategy:
       fail-fast: false
       matrix:
         script: ["test:integration"]
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
         include:
-        - { script: "typing:check", python-version: "3.11" }
         - { script: "test:dependencies", python-version: "3.11" }
+        - { script: "typing:check",      python-version: "3.11" }
 
     steps:
     - name: Checkout code

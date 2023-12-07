@@ -100,6 +100,7 @@ select = ["ALL"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["tap_canny"]
+required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
