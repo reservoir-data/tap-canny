@@ -43,6 +43,7 @@ Source = "https://github.com/edgarrmondragon/tap-canny"
 "tap-canny" = "tap_canny.tap:TapCanny.cli"
 
 [tool.hatch.envs.sync.scripts]
+console = "tap-canny {args:tests}"
 jsonl = "tap-canny {args:tests} > tap-canny.jsonl"
 
 [tool.hatch.envs.test]
