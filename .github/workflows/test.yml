@@ -1,9 +1,22 @@
 name: Test tap-canny
 
 on:
-  pull_request: {}
+  pull_request:
+    branches: [main]
+    paths:
+    - tap_canny/**
+    - tests/**
+    - pyproject.toml
+    - .github/workflows/test.yml
+    - .github/workflows/constraints.txt
   push:
     branches: [main]
+    paths:
+    - tap_canny/**
+    - tests/**
+    - pyproject.toml
+    - .github/workflows/test.yml
+    - .github/workflows/constraints.txt
   schedule:
   - cron: "0 10 * * *"
 
