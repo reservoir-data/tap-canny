@@ -6,9 +6,6 @@ import fnmatch
 
 import pytest
 
-pytest_plugins = ("singer_sdk.testing.pytest_plugin",)
-
-
 XFAIL_NULLABLE = pytest.mark.xfail(reason="Null not documented in OpenAPI spec")
 XFAIL_SCHEMA_MISMATCH = pytest.mark.xfail(reason="Schema mismatch against OpenAPI spec")
 XFAIL_NO_RECORDS = pytest.mark.xfail(reason="No records returned from API")
