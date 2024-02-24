@@ -85,7 +85,6 @@ requires = [
 [tool.ruff]
 line-length = 88
 src = ["tap_canny", "tests"]
-target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
