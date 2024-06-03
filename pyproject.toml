@@ -1,3 +1,9 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+  "hatchling",
+]
+
 [project]
 name = "tap-canny"
 version = "0.0.1"
@@ -9,8 +15,12 @@ keywords = [
   "singer.io",
 ]
 license = "Apache-2.0"
-maintainers = [{ name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" }]
-authors = [{ name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" }]
+maintainers = [
+  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
+]
+authors = [
+  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
+]
 requires-python = ">=3.8"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -43,74 +53,54 @@ console = "tap-canny {args}"
 jsonl = "tap-canny {args} > tap-canny.jsonl"
 
 [tool.hatch.envs.test]
-features = ["testing"]
+features = [
+  "testing",
+]
 [tool.hatch.envs.test.scripts]
 integration = "pytest {args:tests}"
 dependencies = "deptry ."
 
 [tool.hatch.envs.typing]
-features = ["testing", "typing"]
+features = [
+  "testing",
+  "typing",
+]
 [tool.hatch.envs.typing.scripts]
 check = "mypy --strict {args:tap_canny tests}"
 
-[tool.pytest.ini_options]
-addopts = "-vvv"
-filterwarnings = [
-    "error",
-    "default:jsonschema.RefResolver is deprecated as of v4.18.0:DeprecationWarning:singer_sdk._singerlib.schema",
-    "default:'importlib.abc.Traversable' is deprecated and slated for removal:DeprecationWarning:singer_sdk.helpers._resources",
-    "default:pkg_resources is deprecated as an API:DeprecationWarning",
-    "default:Deprecated call to `pkg_resources.declare_namespace:DeprecationWarning",
-    "ignore:No records were available to test:UserWarning",
-    "default:Fields in transformed catalog but not in records:UserWarning",
-]
-xfail_strict = true
-
-[tool.mypy]
-python_version = "3.11"
-warn_redundant_casts = true
-warn_unused_configs = true
-warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = ["backoff.*"]
-
-[build-system]
-build-backend = "hatchling.build"
-requires = [
-  "hatchling",
-]
-
 [tool.ruff]
 line-length = 88
-src = ["tap_canny", "tests"]
+src = [
+  "tap_canny",
+  "tests",
+]
 
-[tool.ruff.lint]
-ignore = [
+lint.select = [
+  "ALL",
+]
+lint.ignore = [
   "ANN101", # missing-type-self
-  "DJ", # flake8-django
-  "COM812",  # missing-trailing-comma
-  "ISC001",  # single-line-implicit-string-concatenation
+  "COM812", # missing-trailing-comma
+  "DJ",     # flake8-django
+  "ISC001", # single-line-implicit-string-concatenation
 ]
-select = ["ALL"]
-
-[tool.ruff.lint.per-file-ignores]
-"noxfile.py" = ["ANN"]
-"tests/*" = [
+lint.per-file-ignores."noxfile.py" = [
+  "ANN",
+]
+lint.per-file-ignores."tests/*" = [
   "ANN201", # missing-return-type-public-function
-  "S101", # assert
+  "COM812", # missing-trailing-comma
+  "ISC001", # single-line-implicit-string-concatenation
+  "S101",   # assert
   "SLF001", # private-member-access
-  "COM812",  # missing-trailing-comma
-  "ISC001",  # single-line-implicit-string-concatenation
 ]
-
-[tool.ruff.lint.isort]
-known-first-party = ["tap_canny"]
-required-imports = ["from __future__ import annotations"]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
+lint.isort.known-first-party = [
+  "tap_canny",
+]
+lint.isort.required-imports = [
+  "from __future__ import annotations",
+]
+lint.pydocstyle.convention = "google"
 
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
@@ -122,4 +112,29 @@ DEP002 = [
   "mypy",
   "pytest",
   "types-requests",
+]
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+filterwarnings = [
+  "error",
+  "default:jsonschema.RefResolver is deprecated as of v4.18.0:DeprecationWarning:singer_sdk._singerlib.schema",
+  "default:'importlib.abc.Traversable' is deprecated and slated for removal:DeprecationWarning:singer_sdk.helpers._resources",
+  "default:pkg_resources is deprecated as an API:DeprecationWarning",
+  "default:Deprecated call to `pkg_resources.declare_namespace:DeprecationWarning",
+  "ignore:No records were available to test:UserWarning",
+  "default:Fields in transformed catalog but not in records:UserWarning",
+]
+xfail_strict = true
+
+[tool.mypy]
+python_version = "3.11"
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = [
+  "backoff.*",
 ]
