@@ -27,7 +27,7 @@ updates:
     directory: "/.github/workflows"
     schedule:
       time: "12:00"
-      interval: daily
+      interval: monthly
     reviewers:
       - "edgarrmondragon"
     commit-message:
