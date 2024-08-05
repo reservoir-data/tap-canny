@@ -34,6 +34,9 @@ dependencies = [
   "requests",
   "singer-sdk~=0.39.0",
 ]
+optional-dependencies.dev = [
+  "tap-canny[testing,typing]",
+]
 optional-dependencies.testing = [
   "deptry",
   "pytest~=8.0",

@@ -10,6 +10,7 @@ from singer_sdk.pagination import BaseOffsetPaginator
 
 if TYPE_CHECKING:
     from requests import Response
+    from singer_sdk.helpers.types import Context
 
 
 class CannyPaginator(BaseOffsetPaginator):
@@ -57,13 +58,11 @@ class CannyStream(RESTStream[int]):
         Returns:
             A dictionary of HTTP headers.
         """
-        headers = {}
-        headers["User-Agent"] = f"{self.tap_name}/{self._tap.plugin_version}"
-        return headers
+        return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
 
     def get_url_params(
         self,
-        context: dict[Any, Any] | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
         next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
