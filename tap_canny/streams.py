@@ -10,6 +10,7 @@ from tap_canny.client import CannyPaginator, CannyStream
 
 if t.TYPE_CHECKING:
     from requests import Response
+    from singer_sdk.helpers.types import Context
 
 
 class Boards(CannyStream):
@@ -295,7 +296,7 @@ class Comments(CannyStream):
     def post_process(
         self,
         row: dict[str, t.Any],
-        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict[str, t.Any] | None:
         """Post-process a row.
 
@@ -527,7 +528,7 @@ class Posts(CannyStream):
     def post_process(
         self,
         row: dict[str, t.Any],
-        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict[str, t.Any] | None:
         """Post-process a record.
 
@@ -606,7 +607,7 @@ class StatusChanges(CannyStream):
     def post_process(
         self,
         row: dict[str, t.Any],
-        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict[str, t.Any] | None:
         """Post process the row.
 
@@ -670,7 +671,7 @@ class Tags(CannyStream):
     def post_process(
         self,
         row: dict[str, t.Any],
-        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict[str, t.Any] | None:
         """Post process the row.
 
@@ -819,7 +820,7 @@ class Votes(CannyStream):
     def post_process(
         self,
         row: dict[str, t.Any],
-        context: dict[t.Any, t.Any] | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict[str, t.Any] | None:
         """Post process the row.
 
