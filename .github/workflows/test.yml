@@ -30,7 +30,13 @@ jobs:
       fail-fast: false
       matrix:
         script: ["test:integration"]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "3.11"
+        - "3.12"
+        - "3.13"
         include:
         - { script: "test:dependencies", python-version: "3.12" }
         - { script: "typing:check",      python-version: "3.12" }
@@ -41,6 +47,7 @@ jobs:
       id: setup-python
       with:
         python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
         cache: pip
 
     - name: Upgrade pip
@@ -71,7 +78,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.x"
         cache: pip
         cache-dependency-path: .pre-commit-config.yaml
 

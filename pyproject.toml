@@ -29,6 +29,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
   "requests",
@@ -118,6 +119,9 @@ DEP002 = [
   "types-requests",
 ]
 
+[tool.pyproject-fmt]
+max_supported_python = "3.13"
+
 [tool.pytest.ini_options]
 addopts = "-vvv"
 filterwarnings = [
@@ -132,7 +136,7 @@ filterwarnings = [
 xfail_strict = true
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
