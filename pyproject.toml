@@ -33,7 +33,7 @@ classifiers = [
 ]
 dependencies = [
   "requests",
-  "singer-sdk~=0.40.0",
+  "singer-sdk~=0.41.0",
 ]
 optional-dependencies.dev = [
   "tap-canny[testing,typing]",
