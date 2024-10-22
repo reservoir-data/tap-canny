@@ -7,7 +7,7 @@ requires = [
 [project]
 name = "tap-canny"
 version = "0.0.1"
-description = "`tap-canny` is a Singer tap for Canny, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for Canny, built with the Meltano SDK for Singer Taps."
 readme = "README.md"
 keywords = [
   "Canny",
@@ -21,12 +21,9 @@ maintainers = [
 authors = [
   { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -136,7 +133,6 @@ filterwarnings = [
 xfail_strict = true
 
 [tool.mypy]
-python_version = "3.12"
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
