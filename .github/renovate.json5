@@ -7,6 +7,17 @@
     "reservoir-data/.github//.github/renovate.json5"
   ],
 
+  // https://docs.renovatebot.com/configuration-options/#custommanagers
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["tox.ini"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s+[A-Za-z0-9_-]+(?<currentValue>.+?)\\s"
+      ]
+    }
+  ],
+
   // https://docs.renovatebot.com/configuration-options/#packagerules
   "packageRules": [
     {
