@@ -78,15 +78,15 @@ tap-canny --config CONFIG --discover > ./catalog.json
 ### Initialize your Development Environment
 
 ```bash
-pipx install hatch
+uv tool install --with tox-uv tox
 ```
 
 ### Create and Run Tests
 
-Run integration tests:
+Run all tests:
 
 ```bash
-hatch run test:integration
+tox run-parallel
 ```
 
 You can also test the `tap-canny` CLI interface directly:
