@@ -5,8 +5,9 @@ from __future__ import annotations
 import typing as t
 
 from singer_sdk import typing as th
+from singer_sdk.pagination import BaseAPIPaginator
 
-from tap_canny.client import CannyPaginator, CannyStream
+from tap_canny.client import CannyStream
 
 if t.TYPE_CHECKING:
     from requests import Response
@@ -18,7 +19,7 @@ class Boards(CannyStream):
 
     name = "boards"
     path = "/v1/boards/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.boards[*]"
 
     schema = th.PropertiesList(
@@ -112,7 +113,7 @@ class ChangelogEntries(CannyStream):
 
     name = "changelog_entries"
     path = "/v1/entries/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.entries[*]"
 
     schema = th.PropertiesList(
@@ -222,7 +223,7 @@ class Comments(CannyStream):
 
     name = "comments"
     path = "/v1/comments/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.comments[*]"
 
     schema = th.PropertiesList(
@@ -325,7 +326,7 @@ class Companies(CannyStream):
 
     name = "companies"
     path = "/v1/companies/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.companies[*]"
 
     schema = th.PropertiesList(
@@ -372,7 +373,7 @@ class Opportunities(CannyStream):
 
     name = "opportunities"
     path = "/v1/opportunities/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.opportunities[*]"
 
     schema = th.PropertiesList(
@@ -419,7 +420,7 @@ class Posts(CannyStream):
 
     name = "posts"
     path = "/v1/posts/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.posts[*]"
 
     schema = th.PropertiesList(
@@ -559,7 +560,7 @@ class StatusChanges(CannyStream):
 
     name = "status_changes"
     path = "/v1/status_changes/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.statusChanges[*]"
 
     schema = th.PropertiesList(
@@ -632,7 +633,7 @@ class Tags(CannyStream):
 
     name = "tags"
     path = "/v1/tags/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.tags[*]"
 
     schema = th.PropertiesList(
@@ -689,10 +690,22 @@ class Tags(CannyStream):
         return row
 
 
-class UsersPaginator(CannyPaginator):
+class UsersPaginator(BaseAPIPaginator[str | None]):
     """Users paginator."""
 
     def has_more(self, response: Response) -> bool:
+        """Return True if there are more pages to fetch.
+
+        Args:
+            response: The last response object.
+
+        Returns:
+            True if there are more pages to fetch.
+        """
+        data = response.json()
+        return data.get("hasNextPage", False)  # type: ignore[no-any-return]
+
+    def get_next(self, response: Response) -> str | None:
         """Check if there are more pages.
 
         Args:
@@ -701,16 +714,17 @@ class UsersPaginator(CannyPaginator):
         Returns:
             True if there are more pages, False otherwise.
         """
-        return len(response.json()) > 0
+        data = response.json()
+        return data.get("cursor")  # type: ignore[no-any-return]
 
 
 class Users(CannyStream):
     """Users stream."""
 
     name = "users"
-    path = "/v1/users/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
-    records_jsonpath = "$[*]"
+    path = "/v2/users/list"
+    primary_keys: tuple[str, ...] = ("id",)
+    records_jsonpath = "$.users[*]"
 
     schema = th.PropertiesList(
         th.Property(
@@ -719,9 +733,19 @@ class Users(CannyStream):
             description="The user's system ID",
         ),
         th.Property(
+            "alias",
+            th.StringType,
+            description="The user's alias",
+        ),
+        th.Property(
             "avatarURL",
             th.StringType,
             description="The user's avatar URL",
+        ),
+        th.Property(
+            "created",
+            th.DateTimeType,
+            description="The date and time the user was created",
         ),
         th.Property(
             "customFields",
@@ -770,7 +794,7 @@ class Users(CannyStream):
         Returns:
             A new paginator.
         """
-        return UsersPaginator(0, self.page_size)
+        return UsersPaginator(None)
 
 
 class Votes(CannyStream):
@@ -778,7 +802,7 @@ class Votes(CannyStream):
 
     name = "votes"
     path = "/v1/votes/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: tuple[str, ...] = ("id",)
     records_jsonpath = "$.votes[*]"
 
     schema = th.PropertiesList(
