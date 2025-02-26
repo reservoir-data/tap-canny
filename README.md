@@ -56,7 +56,7 @@ See the [Canny API docs](https://developers.canny.io/api-reference#authenticatio
 | opportunities     | `/v1/opportunities`   | FULL_TABLE         |
 | posts             | `/v1/posts/list`      | FULL_TABLE         |
 | tags              | `/v1/tags/list`       | FULL_TABLE         |
-| users             | `/v1/users/list`      | FULL_TABLE         |
+| users             | `/v2/users/list`      | FULL_TABLE         |
 | votes             | `/v1/votes/list`      | FULL_TABLE         |
 
 A full list of supported settings and capabilities is available by running: `tap-canny --about`
