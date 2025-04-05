@@ -105,13 +105,7 @@ max_supported_python = "3.13"
 addopts = "-vvv"
 filterwarnings = [
   "error",
-  "default:jsonschema.RefResolver is deprecated as of v4.18.0:DeprecationWarning:singer_sdk._singerlib.schema",
-  "default:'importlib.abc.Traversable' is deprecated and slated for removal:DeprecationWarning:singer_sdk.helpers._resources",
-  "default:pkg_resources is deprecated as an API:DeprecationWarning",
-  "default:Deprecated call to `pkg_resources.declare_namespace:DeprecationWarning",
-  "ignore:No records were available to test:UserWarning",
-  "default:Fields in transformed catalog but not in records:UserWarning",
-  "default:Use `http_method` instead:singer_sdk.helpers._compat.SingerSDKDeprecationWarning",
+  "default:No records were available to test:UserWarning",
 ]
 xfail_strict = true
 
