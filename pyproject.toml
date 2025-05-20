@@ -27,6 +27,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
   "requests~=2.32.0",
@@ -99,13 +100,14 @@ DEP002 = [
 ]
 
 [tool.pyproject-fmt]
-max_supported_python = "3.13"
+max_supported_python = "3.14"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
 filterwarnings = [
   "error",
   "default:No records were available to test:UserWarning",
+  "default:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
 ]
 xfail_strict = true
 
