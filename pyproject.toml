@@ -30,7 +30,6 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-  "requests~=2.32.0",
   "singer-sdk~=0.47.1",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-canny#readme"
