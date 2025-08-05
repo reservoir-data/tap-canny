@@ -688,7 +688,6 @@ name = "tap-canny"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
-    { name = "requests" },
     { name = "singer-sdk" },
 ]
 
@@ -711,10 +710,7 @@ typing = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "requests", specifier = "~=2.32.0" },
-    { name = "singer-sdk", specifier = "~=0.47.1" },
-]
+requires-dist = [{ name = "singer-sdk", specifier = "~=0.47.1" }]
 
 [package.metadata.requires-dev]
 dev = [
