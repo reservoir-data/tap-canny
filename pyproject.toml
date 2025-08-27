@@ -32,9 +32,9 @@ classifiers = [
 dependencies = [
   "singer-sdk~=0.48.0",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-canny#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-canny"
-urls.Source = "https://github.com/edgarrmondragon/tap-canny"
+urls.Documentation = "https://github.com/reservoir-data/tap-canny#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-canny"
+urls.Source = "https://github.com/reservoir-data/tap-canny"
 scripts."tap-canny" = "tap_canny.tap:TapCanny.cli"
 
 [dependency-groups]
