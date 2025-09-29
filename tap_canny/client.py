@@ -43,11 +43,9 @@ class CannyStream(RESTStream[int]):
         Returns:
             The authenticator instance for this REST stream.
         """
-        api_key: str = self.config["api_key"]
-        return APIKeyAuthenticator.create_for_stream(
-            self,
+        return APIKeyAuthenticator(
             key="apiKey",
-            value=api_key,
+            value=self.config["api_key"],
             location="params",
         )
 
