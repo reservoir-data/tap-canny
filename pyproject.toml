@@ -52,6 +52,11 @@ typing = [
   "types-requests~=2.32.0",
 ]
 
+[tool.uv]
+prerelease = "allow"
+preview = true
+required-version = ">=0.5.19"
+
 [tool.ruff]
 line-length = 88
 src = [
@@ -145,8 +150,3 @@ commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_canny
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
-
-[tool.uv]
-prerelease = "allow"
-preview = true
-required-version = ">=0.5.19"
