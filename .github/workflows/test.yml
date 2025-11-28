@@ -7,7 +7,7 @@ on:
     - tap_canny/**
     - tests/**
     - pyproject.toml
-    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
   push:
     branches: [main]
@@ -15,7 +15,7 @@ on:
     - tap_canny/**
     - tests/**
     - pyproject.toml
-    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
   workflow_dispatch:
   schedule:
