@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
-import typing as t
+from typing import TYPE_CHECKING, Any, ClassVar, override
 
 from singer_sdk import typing as th
 from singer_sdk.pagination import BaseAPIPaginator
 
 from tap_canny.client import CannyStream
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from requests import Response
-    from singer_sdk.helpers.types import Context
+    from singer_sdk.helpers.types import Context, Record
 
 
 class Boards(CannyStream):
@@ -71,7 +71,7 @@ class Categories(CannyStream):
 
     name = "categories"
     path = "/v1/categories/list"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys: ClassVar[list[str]] = ["id"]
     records_jsonpath = "$.categories[*]"
 
     schema = th.PropertiesList(
@@ -294,20 +294,13 @@ class Comments(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def post_process(
         self,
-        row: dict[str, t.Any],
-        context: Context | None = None,  # noqa: ARG002
-    ) -> dict[str, t.Any] | None:
-        """Post-process a row.
-
-        Args:
-            row: A row of data.
-            context: A context object.
-
-        Returns:
-            A row of data.
-        """
+        row: Record,
+        context: Context | None = None,
+    ) -> Record | None:
+        """Post-process a row."""
         author = row.pop("author", {})
         board = row.pop("board", {})
         mentions = row.pop("mentions", [])
@@ -526,20 +519,13 @@ class Posts(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def post_process(
         self,
-        row: dict[str, t.Any],
-        context: Context | None = None,  # noqa: ARG002
-    ) -> dict[str, t.Any] | None:
-        """Post-process a record.
-
-        Args:
-            row: A row of data.
-            context: A context object.
-
-        Returns:
-            The processed row of data.
-        """
+        row: Record,
+        context: Context | None = None,
+    ) -> Record | None:
+        """Post-process a record."""
         author = row.pop("author", {}) or {}
         board = row.pop("board", {}) or {}
         by = row.pop("by", {}) or {}
@@ -605,20 +591,13 @@ class StatusChanges(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def post_process(
         self,
-        row: dict[str, t.Any],
-        context: Context | None = None,  # noqa: ARG002
-    ) -> dict[str, t.Any] | None:
-        """Post process the row.
-
-        Args:
-            row: The row to post process.
-            context: The context.
-
-        Returns:
-            The post processed row.
-        """
+        row: Record,
+        context: Context | None = None,
+    ) -> Record | None:
+        """Post process the row."""
         changer = row.pop("changer", {})
         post = row.pop("post", {})
 
@@ -669,20 +648,13 @@ class Tags(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def post_process(
         self,
-        row: dict[str, t.Any],
-        context: Context | None = None,  # noqa: ARG002
-    ) -> dict[str, t.Any] | None:
-        """Post process the row.
-
-        Args:
-            row: The row to post process.
-            context: The context.
-
-        Returns:
-            The post processed row.
-        """
+        row: Record,
+        context: Context | None = None,
+    ) -> Record | None:
+        """Post process the row."""
         board = row.pop("board", {})
 
         row["board_id"] = board.get("id")
@@ -693,27 +665,15 @@ class Tags(CannyStream):
 class UsersPaginator(BaseAPIPaginator[str | None]):
     """Users paginator."""
 
+    @override
     def has_more(self, response: Response) -> bool:
-        """Return True if there are more pages to fetch.
-
-        Args:
-            response: The last response object.
-
-        Returns:
-            True if there are more pages to fetch.
-        """
+        """Return True if there are more pages to fetch."""
         data = response.json()
         return data.get("hasNextPage", False)  # type: ignore[no-any-return]
 
+    @override
     def get_next(self, response: Response) -> str | None:
-        """Check if there are more pages.
-
-        Args:
-            response: The response object.
-
-        Returns:
-            True if there are more pages, False otherwise.
-        """
+        """Check if there are more pages."""
         data = response.json()
         return data.get("cursor")  # type: ignore[no-any-return]
 
@@ -788,12 +748,9 @@ class Users(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def get_new_paginator(self) -> UsersPaginator:
-        """Get a new paginator.
-
-        Returns:
-            A new paginator.
-        """
+        """Get a new paginator."""
         return UsersPaginator(None)
 
 
@@ -841,20 +798,13 @@ class Votes(CannyStream):
         ),
     ).to_dict()
 
+    @override
     def post_process(
         self,
-        row: dict[str, t.Any],
-        context: Context | None = None,  # noqa: ARG002
-    ) -> dict[str, t.Any] | None:
-        """Post process the row.
-
-        Args:
-            row: The row to post process.
-            context: The context.
-
-        Returns:
-            The post processed row.
-        """
+        row: dict[str, Any],
+        context: Context | None = None,
+    ) -> dict[str, Any] | None:
+        """Post process the row."""
         board = row.pop("board", {})
         post = row.pop("post", {})
         voter = row.pop("voter", {})
