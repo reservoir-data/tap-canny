@@ -53,9 +53,9 @@ typing = [
 ]
 
 [tool.uv]
+required-version = ">=0.5.19"
 prerelease = "allow"
 preview = true
-required-version = ">=0.5.19"
 
 [tool.ruff]
 line-length = 88
@@ -63,7 +63,6 @@ src = [
   "tap_canny",
   "tests",
 ]
-
 lint.select = [
   "ALL",
 ]
@@ -90,13 +89,11 @@ lint.isort.required-imports = [
 ]
 lint.pydocstyle.convention = "google"
 
-[tool.deptry.package_module_name_map]
-mypy = "mypy"
-tap-canny = "tap_canny"
-types-requests = "types_requests"
-
-[tool.deptry.per_rule_ignores]
-DEP002 = [
+[tool.deptry]
+package_module_name_map.mypy = "mypy"
+package_module_name_map.tap-canny = "tap_canny"
+package_module_name_map.types-requests = "types_requests"
+per_rule_ignores.DEP002 = [
   "deptry",
   "mypy",
   "pytest",
@@ -106,14 +103,14 @@ DEP002 = [
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
-[tool.pytest.ini_options]
-addopts = "-vvv"
-filterwarnings = [
+[tool.pytest]
+ini_options.addopts = "-vvv"
+ini_options.filterwarnings = [
   "error",
   "default:No records were available to test:UserWarning",
   "default:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
 ]
-xfail_strict = true
+ini_options.xfail_strict = true
 
 [tool.tox]
 min_version = "4.22"
@@ -130,23 +127,17 @@ env_list = [
   "3.13",
   "3.12",
 ]
-
-[tool.tox.env.dependencies]
-dependency_groups = [ "testing" ]
-commands = [ [ "deptry", "." ] ]
-
-[tool.tox.env.typing]
-dependency_groups = [ "testing", "typing" ]
-commands = [
+env.dependencies.dependency_groups = [ "testing" ]
+env.dependencies.commands = [ [ "deptry", "." ] ]
+env.typing.dependency_groups = [ "testing", "typing" ]
+env.typing.commands = [
   [ "mypy", "--strict", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
   [ "ty", "check", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
 ]
-
-[tool.tox.env_run_base]
-runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_CANNY_*" ]
-dependency_groups = [ "testing" ]
-commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+env_run_base.runner = "uv-venv-lock-runner"
+env_run_base.pass_env = [ "TAP_CANNY_*" ]
+env_run_base.dependency_groups = [ "testing" ]
+env_run_base.commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
 
 [tool.mypy]
 warn_redundant_casts = true
