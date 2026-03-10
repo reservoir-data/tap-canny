@@ -6,14 +6,14 @@ from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import APIKeyAuthenticator
-from singer_sdk.pagination import BaseOffsetPaginator
+from singer_sdk.pagination import OffsetPaginator
 
 if TYPE_CHECKING:
     from requests import Response
     from singer_sdk.helpers.types import Context
 
 
-class CannyPaginator(BaseOffsetPaginator):
+class CannyPaginator(OffsetPaginator):
     """Canny API pagination strategy."""
 
     @override
