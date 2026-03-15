@@ -15,12 +15,6 @@ keywords = [
   "singer.io",
 ]
 license = "Apache-2.0"
-maintainers = [
-  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
-]
-authors = [
-  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
-]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -31,10 +25,18 @@ classifiers = [
 dependencies = [
   "singer-sdk~=0.54.0a4",
 ]
-urls.Documentation = "https://github.com/reservoir-data/tap-canny#readme"
-urls.Homepage = "https://github.com/reservoir-data/tap-canny"
-urls.Source = "https://github.com/reservoir-data/tap-canny"
-scripts."tap-canny" = "tap_canny.tap:TapCanny.cli"
+[[project.authors]]
+name = "Edgar Ramírez-Mondragón"
+email = "edgarrm358@gmail.com"
+[[project.maintainers]]
+name = "Edgar Ramírez-Mondragón"
+email = "edgarrm358@gmail.com"
+[project.scripts]
+"tap-canny" = "tap_canny.tap:TapCanny.cli"
+[project.urls]
+Documentation = "https://github.com/reservoir-data/tap-canny#readme"
+Homepage = "https://github.com/reservoir-data/tap-canny"
+Source = "https://github.com/reservoir-data/tap-canny"
 
 [dependency-groups]
 dev = [
@@ -63,37 +65,40 @@ src = [
   "tap_canny",
   "tests",
 ]
-lint.select = [
+[tool.ruff.lint]
+select = [
   "ALL",
 ]
-lint.ignore = [
+ignore = [
   "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
   "ISC001", # single-line-implicit-string-concatenation
 ]
-lint.per-file-ignores."noxfile.py" = [
+per-file-ignores."noxfile.py" = [
   "ANN",
 ]
-lint.per-file-ignores."tests/*" = [
+per-file-ignores."tests/*" = [
   "ANN201", # missing-return-type-public-function
   "COM812", # missing-trailing-comma
   "ISC001", # single-line-implicit-string-concatenation
   "S101",   # assert
   "SLF001", # private-member-access
 ]
-lint.isort.known-first-party = [
+isort.known-first-party = [
   "tap_canny",
 ]
-lint.isort.required-imports = [
+isort.required-imports = [
   "from __future__ import annotations",
 ]
-lint.pydocstyle.convention = "google"
+pydocstyle.convention = "google"
 
 [tool.deptry]
-package_module_name_map.mypy = "mypy"
-package_module_name_map.tap-canny = "tap_canny"
-package_module_name_map.types-requests = "types_requests"
-per_rule_ignores.DEP002 = [
+[tool.deptry.package_module_name_map]
+mypy = "mypy"
+tap-canny = "tap_canny"
+types-requests = "types_requests"
+[tool.deptry.per_rule_ignores]
+DEP002 = [
   "deptry",
   "mypy",
   "pytest",
@@ -101,16 +106,24 @@ per_rule_ignores.DEP002 = [
 ]
 
 [tool.pyproject-fmt]
-max_supported_python = "3.14"
+table_format = "long"
 
 [tool.pytest]
-ini_options.addopts = "-vvv"
-ini_options.filterwarnings = [
+addopts = [
+  "-vvv",
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
+]
+filterwarnings = [
   "error",
   "default:No records were available to test:UserWarning",
   "default:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
 ]
-ini_options.xfail_strict = true
+log_level = "INFO"
+minversion = "9"
+strict = true
+testpaths = [ "tests" ]
 
 [tool.tox]
 min_version = "4.22"
@@ -123,23 +136,29 @@ requires = [
 env_list = [
   "dependencies",
   "typing",
-  "3.14",
-  "3.13",
-  "3.12",
+  { product = [
+    { prefix = "3.", start = 12 },
+  ] },
 ]
-env.dependencies.dependency_groups = [ "testing" ]
-env.dependencies.commands = [ [ "deptry", "." ] ]
-env.typing.dependency_groups = [ "testing", "typing" ]
-env.typing.commands = [
-  [ "mypy", "--strict", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
+[tool.tox.env]
+dependencies.dependency_groups = [ "testing" ]
+dependencies.commands = [ [ "deptry", "." ] ]
+typing.dependency_groups = [ "testing", "typing" ]
+typing.commands = [
+  [ "mypy", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
   [ "ty", "check", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
 ]
-env_run_base.runner = "uv-venv-lock-runner"
-env_run_base.pass_env = [ "TAP_CANNY_*" ]
-env_run_base.dependency_groups = [ "testing" ]
-env_run_base.commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+pass_env = [ "TAP_CANNY_*" ]
+dependency_groups = [ "testing" ]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
 
 [tool.mypy]
+enable_error_code = [ "ignore-without-code", "redundant-expr", "truthy-bool" ]
+strict = true
 warn_redundant_casts = true
+warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
