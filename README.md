@@ -22,23 +22,23 @@ Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 
 ## Capabilities
 
-* `catalog`
-* `state`
-* `discover`
-* `about`
-* `stream-maps`
-* `schema-flattening`
+- `catalog`
+- `state`
+- `discover`
+- `about`
+- `stream-maps`
+- `schema-flattening`
 
 ## Settings
 
-| Setting             | Required | Default | Description |
+| Setting | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
-| api_key             | True     | None    | API Key for Canny |
-| start_date          | False    | None    | Earliest datetime to get data from |
-| stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
-| stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
-| flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
-| flattening_max_depth| False    | None    | The max depth to flatten schemas. |
+| api_key | True | None | API Key for Canny |
+| start_date | False | None | Earliest datetime to get data from |
+| stream_maps | False | None | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config | False | None | User-defined config values to be used within map expressions. |
+| flattening_enabled | False | None | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth| False | None | The max depth to flatten schemas. |
 
 ### Authentication
 
@@ -46,18 +46,18 @@ See the [Canny API docs](https://developers.canny.io/api-reference#authenticatio
 
 ## Supported Streams
 
-| Stream            | Endpoint              | Replication Method |
+| Stream | Endpoint | Replication Method |
 | :---------------- | :-------------------- | :----------------- |
-| boards            | `/v1/boards/list`     | FULL_TABLE         |
-| categories        | `/v1/categories/list` | FULL_TABLE         |
-| changelog_entries | `/v1/entries/list`    | FULL_TABLE         |
-| comments          | `/v1/comments/list`   | FULL_TABLE         |
-| companies         | `/v1/companies/list`  | FULL_TABLE         |
-| opportunities     | `/v1/opportunities`   | FULL_TABLE         |
-| posts             | `/v1/posts/list`      | FULL_TABLE         |
-| tags              | `/v1/tags/list`       | FULL_TABLE         |
-| users             | `/v2/users/list`      | FULL_TABLE         |
-| votes             | `/v1/votes/list`      | FULL_TABLE         |
+| boards | `/v1/boards/list` | FULL_TABLE |
+| categories | `/v1/categories/list` | FULL_TABLE |
+| changelog_entries | `/v1/entries/list` | FULL_TABLE |
+| comments | `/v1/comments/list` | FULL_TABLE |
+| companies | `/v1/companies/list` | FULL_TABLE |
+| opportunities | `/v1/opportunities` | FULL_TABLE |
+| posts | `/v1/posts/list` | FULL_TABLE |
+| tags | `/v1/tags/list` | FULL_TABLE |
+| users | `/v2/users/list` | FULL_TABLE |
+| votes | `/v1/votes/list` | FULL_TABLE |
 
 A full list of supported settings and capabilities is available by running: `tap-canny --about`
 
