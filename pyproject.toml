@@ -51,7 +51,7 @@ testing = [
 typing = [
   "mypy~=1.19.0",
   "ty>=0.0.8",
-  "types-requests~=2.32.0",
+  "types-requests~=2.33.0",
 ]
 
 [tool.uv]
