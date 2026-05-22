@@ -51,7 +51,6 @@ testing = [
 typing = [
   "mypy~=1.19.0",
   "ty>=0.0.8",
-  "types-requests~=2.33.0",
 ]
 
 [tool.uv]
@@ -96,13 +95,11 @@ pydocstyle.convention = "google"
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
 tap-canny = "tap_canny"
-types-requests = "types_requests"
 [tool.deptry.per_rule_ignores]
 DEP002 = [
   "deptry",
   "mypy",
   "pytest",
-  "types-requests",
 ]
 
 [tool.pyproject-fmt]
@@ -118,10 +115,8 @@ warn_unused_ignores = true
 
 [tool.pytest]
 addopts = [
-  "-vvv",
+  "-v",
   "-ra",
-  "--strict-config",
-  "--strict-markers",
 ]
 filterwarnings = [
   "error",
