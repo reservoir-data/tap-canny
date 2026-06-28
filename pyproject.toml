@@ -23,7 +23,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-  "singer-sdk~=0.54.0a4",
+  "singer-sdk~=0.54.5",
 ]
 [[project.authors]]
 name = "Edgar Ramírez-Mondragón"
@@ -40,17 +40,17 @@ Source = "https://github.com/reservoir-data/tap-canny"
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25",
   { include-group = "testing" },
   { include-group = "typing" },
 ]
 testing = [
-  "deptry>=0.12",
   "pytest~=9.0",
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy~=1.19.0",
-  "ty>=0.0.8",
+  "mypy>=2.1",
+  "ty>=0.0.50",
 ]
 
 [tool.uv]
@@ -91,17 +91,6 @@ isort.required-imports = [
 ]
 pydocstyle.convention = "google"
 
-[tool.deptry]
-[tool.deptry.package_module_name_map]
-mypy = "mypy"
-tap-canny = "tap_canny"
-[tool.deptry.per_rule_ignores]
-DEP002 = [
-  "deptry",
-  "mypy",
-  "pytest",
-]
-
 [tool.pyproject-fmt]
 table_format = "long"
 
@@ -129,22 +118,17 @@ strict = true
 testpaths = [ "tests" ]
 
 [tool.tox]
-min_version = "4.22"
 requires = [
-  # renovate: datasource=pypi depName=tox
-  "tox~=4.22",
-  # renovate: datasource=pypi depName=tox-uv
-  "tox-uv~=1.17",
+  "tox>=4.55",
+  "tox-uv>=1.35",
 ]
 env_list = [
   "dependencies",
   "typing",
-  { product = [
-    { prefix = "3.", start = 12 },
-  ] },
+  { prefix = "3.", start = 12 },
 ]
 [tool.tox.env]
-dependencies.dependency_groups = [ "testing" ]
+dependencies.dependency_groups = [ "dev" ]
 dependencies.commands = [ [ "deptry", "." ] ]
 typing.dependency_groups = [ "testing", "typing" ]
 typing.commands = [
