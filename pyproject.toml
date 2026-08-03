@@ -72,6 +72,7 @@ ignore = [
   "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
   "ISC001", # single-line-implicit-string-concatenation
+  "CPY001", # missing-copyright-notice
 ]
 per-file-ignores."noxfile.py" = [
   "ANN",
@@ -135,7 +136,6 @@ typing.commands = [
   [ "mypy", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
   [ "ty", "check", { replace = "posargs", default = [ "tap_canny", "tests" ], extend = true } ],
 ]
-
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 dependency_groups = [ "testing" ]
