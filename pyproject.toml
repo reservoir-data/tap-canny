@@ -72,6 +72,7 @@ ignore = [
   "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
   "ISC001", # single-line-implicit-string-concatenation
+  "CPY001", # missing-copyright-notice
 ]
 per-file-ignores."noxfile.py" = [
   "ANN",
