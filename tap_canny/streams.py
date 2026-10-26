@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, ClassVar, override
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import typing as th
 from singer_sdk.pagination import BaseAPIPaginator
@@ -19,7 +19,7 @@ class Boards(CannyStream):
 
     name = "boards"
     path = "/v1/boards/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.boards[*]"
 
     schema = th.PropertiesList(
@@ -71,7 +71,7 @@ class Categories(CannyStream):
 
     name = "categories"
     path = "/v1/categories/list"
-    primary_keys: ClassVar[list[str]] = ["id"]
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.categories[*]"
 
     schema = th.PropertiesList(
@@ -113,7 +113,7 @@ class ChangelogEntries(CannyStream):
 
     name = "changelog_entries"
     path = "/v1/entries/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.entries[*]"
 
     schema = th.PropertiesList(
@@ -223,7 +223,7 @@ class Comments(CannyStream):
 
     name = "comments"
     path = "/v1/comments/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.comments[*]"
 
     schema = th.PropertiesList(
@@ -319,7 +319,7 @@ class Companies(CannyStream):
 
     name = "companies"
     path = "/v1/companies/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.companies[*]"
 
     schema = th.PropertiesList(
@@ -366,7 +366,7 @@ class Opportunities(CannyStream):
 
     name = "opportunities"
     path = "/v1/opportunities/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.opportunities[*]"
 
     schema = th.PropertiesList(
@@ -413,7 +413,7 @@ class Posts(CannyStream):
 
     name = "posts"
     path = "/v1/posts/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.posts[*]"
 
     schema = th.PropertiesList(
@@ -546,7 +546,7 @@ class StatusChanges(CannyStream):
 
     name = "status_changes"
     path = "/v1/status_changes/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.statusChanges[*]"
 
     schema = th.PropertiesList(
@@ -612,7 +612,7 @@ class Tags(CannyStream):
 
     name = "tags"
     path = "/v1/tags/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.tags[*]"
 
     schema = th.PropertiesList(
@@ -683,7 +683,7 @@ class Users(CannyStream):
 
     name = "users"
     path = "/v2/users/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.users[*]"
 
     schema = th.PropertiesList(
@@ -759,7 +759,7 @@ class Votes(CannyStream):
 
     name = "votes"
     path = "/v1/votes/list"
-    primary_keys: tuple[str, ...] = ("id",)
+    primary_keys: list[str] | tuple[str, ...] = ("id",)
     records_jsonpath = "$.votes[*]"
 
     schema = th.PropertiesList(
