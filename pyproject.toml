@@ -111,8 +111,7 @@ addopts = [
 ]
 filterwarnings = [
   "error",
-  "default:No records were available to test:UserWarning",
-  "default:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
+  "once:No records were available to test:UserWarning",
 ]
 log_level = "INFO"
 minversion = "9"
